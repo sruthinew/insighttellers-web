@@ -1,0 +1,58 @@
+<div class="container" [ngClass]="{'container-mobile': (isScreen == 'mobile')}">
+    <div [appAnimate]="'moveUp'" class="header">
+        <h1 class="content-title">Request For Proposal</h1>
+        <p class="content-desc">
+            We love to express how much fun it is to work and how stressful it can get at times!<br>
+            Talking helps to know things better! Fill the form below so we can connect.
+        </p>
+    </div>
+    <div class="content" [ngClass]="{'content-medium': (isScreen == 'medium' || isScreen == 'mobile')}">
+        <div [appAnimate]="'moveUp'" class="vector">
+            <img src="assets/vectors/contact-us.webp" alt="Contact Us illustration from undraw.com">
+        </div>
+        <form [appAnimate]="'moveUp'" [formGroup]="contactUsForm" class="form-group" (ngSubmit)="submitContactForm()">
+            <div class="input-group-inline">
+                <div class="input-group">
+                    <span class="input-icon ri-user-line"></span>
+                    <input appTextInput type="text" name="first_name" placeholder="First name*"
+                        formControlName="first_name">
+                </div>
+                <div class="input-group">
+                    <span class="input-icon ri-user-line"></span>
+                    <input appTextInput type="text" name="last_name" placeholder="Last name*"
+                        formControlName="last_name">
+                </div>
+            </div>
+            <div class="input-group">
+                <span class="ri-mail-line"></span>
+                <input appTextInput type="email" name="email" placeholder="Email*"
+                    formControlName="email">
+            </div>
+            <div class="input-group">
+                <span class="ri-phone-line"></span>
+                <input appTextInput type="number" name="phone_number" placeholder="Phone number"
+                    formControlName="phone_number">
+            </div>
+            <div class="input-group-inline">
+                <div class="input-group">
+                    <span class="input-icon ri-building-line"></span>
+                    <input appTextInput type="text" name="company" placeholder="Company*"
+                        formControlName="company">
+                </div>
+                <div class="input-group">
+                    <span class="input-icon ri-map-pin-line"></span>
+                    <input appTextInput type="text" name="country" placeholder="Country*"
+                        formControlName="country">
+                </div>
+            </div>
+            <div class="input-group">
+                <span class="ri-chat-4-line textarea-icon"></span>
+                <textarea appTextInput name="message" rows="6" placeholder="Type your message ... (minimum 30 characters)*"
+                    minlength="30" formControlName="message"></textarea>
+            </div>
+            <button type="submit" class="button" [disabled]="contactUsForm.invalid">
+                Send
+            </button>
+        </form>
+    </div>
+</div>

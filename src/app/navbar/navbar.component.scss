@@ -1,0 +1,104 @@
+@import '../../global.scss';
+
+nav {
+    @include d-flex(row, space-between, center);
+    padding-top: 2rem;
+    margin-inline: 5.4rem;
+    transition: all .4s ease-in-out;
+    margin-top: 1rem;
+    
+    #toggle-sidebar {
+        display: none;
+        font-size: 1.4rem;
+    }
+
+    .nav-links-container {
+        position: relative;
+
+        .nav-links {
+            .nav-link {
+                display: inline-block;
+                cursor: pointer;
+                margin-inline: .8rem;
+                text-decoration: none;
+                font-size: 1.1vw;
+                text-transform: capitalize;
+                color: $primary-black;
+
+                transition-property: transform, color; 
+                transition-duration: .5s; 
+                transition-timing-function: ease-out; 
+            }
+
+            .nav-link-active {
+                transform: translateY(-4px);
+                color: $primary-color;
+            }
+        }
+
+        .nav-link__active {
+            position: absolute;
+            width: 30px;
+            bottom: -4px;
+            height: 1.5px;
+            background: $primary-color;
+            border-radius: 10px;
+
+            transition: all 0.4s ease-out;
+        }
+    }
+}
+
+// on scroll sticky navbar class
+.navbar-stickyly-active {
+    padding: 1rem;
+    border-radius: 1rem;
+    backdrop-filter: blur(5.1px);
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0.2rem 0.5rem rgb(0 0 0 / 8%);
+
+    @media only screen and (max-width: 599.98px) and (orientation: portrait) {
+        margin-top: .8rem;
+        margin-inline: 1rem !important;
+
+        .app-logo { margin-left: 0 !important; }
+
+        #toggle-sidebar { margin-right: 0 !important; }
+    }
+} 
+
+// View for mobile screen
+
+.navbar-mobile {
+    position: relative;
+    margin-inline: 0;
+
+    .app-logo {
+        margin-left: 2rem;
+    }
+    
+    #toggle-sidebar {
+        display: block;
+        margin-right: 2rem;
+    }
+
+    .nav-links-container {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0 0 0 / 100%);
+        display: none;
+
+        .nav-link__active {
+            display: none;
+        }
+        
+        .nav-links {
+            @include d-flex(column, center, center);
+
+            * {
+                margin-block: 1rem;
+            }
+        }
+    }
+}

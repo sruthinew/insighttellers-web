@@ -1,0 +1,137 @@
+@import '../../../global.scss';
+
+.container {
+    @include d-flex(row, flex-start, center);
+    position: relative;
+    padding-inline: 5.4rem;
+    
+    .header {
+        @include d-flex(column, center, center);
+        margin-right: 4rem;
+
+        .nav-btns {
+            @include d-flex(row, center, center);
+            margin-top: 2rem;
+            cursor: pointer;
+            user-select: none;
+
+            i, span {
+                font-size: 3rem;
+                opacity: .6;
+                color: $primary-black;
+            }
+        }
+
+        .container-title {
+            font-family: 'portico-regular';
+            writing-mode: vertical-rl;
+            font-size: 12vh;
+        }
+    }
+
+
+    .content {
+        columns: 3;
+        column-gap: 1rem;
+
+        .card {
+            cursor: pointer;
+            padding: 1.5rem 1rem;
+            border: 1px solid $primary-black;
+            border-radius: 1.5rem;
+            text-align: center;
+            break-inside: avoid;
+            margin-bottom: 1rem;
+            transition: all .5s ease;
+
+            .card-title {
+                font-weight: 500;
+                font-size: 1.6vw;
+            }
+            
+            .card-desc {
+                font-size: 1.1vw;
+                margin-top: .8rem;
+            }
+
+            .card-content {
+                position: relative;
+
+                .card-inactive, .card-active {
+                    transition-property: opacity, height;
+                    transition-duration: .3s;
+                    transition-timing-function: ease-in;
+                }
+
+                .card-inactive {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    opacity: 0;
+                }
+            }
+            
+            &:hover {
+                color: $primary-white;
+                border-color: $primary-white;
+                background-color: $primary-color-light;
+                box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+            }
+        }
+    }
+}
+
+// view for medium sized screen
+.content-medium {
+    columns: 2 !important;
+}
+
+// view for mobile screen
+.container-mobile {
+    padding-inline: 2rem;
+    flex-direction: column;
+
+    .header {
+        flex-direction: row;
+        margin-right: 0;
+        margin-bottom: 1rem;
+
+        .nav-btns {
+            display: none;
+        }
+
+        .container-title {
+            writing-mode: unset;
+            font-size: 10vw;
+        }
+    }
+
+    .content {
+        @include d-flex(row, flex-start, center);
+        width: 100%;
+        overflow: none;
+        columns: 0;
+
+        .card {
+            --width-portfolio-card: 70vw;
+            width: var(--width-portfolio-card);
+            flex: 0 0 var(--width-portfolio-card);
+            transition: none;
+
+            .card-title {
+                font-size: 4.8vw;
+            }
+            
+            .card-desc {
+                font-size: 4vw;
+            }
+        }
+
+        .card-active {
+            color: $primary-white;
+            border-color: $primary-white;
+            background-color: $primary-color-light;
+            box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+        }
+    }
+}

@@ -1,0 +1,130 @@
+@import '../../../global.scss';
+
+// Illustration component
+svg {
+    max-width: 30vw;
+    width: auto;
+}
+
+
+// About us component
+.container {
+    position: relative;
+    background-color: $primary-color-light;
+    
+    .container-front, .container-back {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100%;
+
+        .content {
+            @include d-flex(row, space-between, center);
+            height: 100%;
+            padding-inline: 5.4rem;
+
+            .section-title {
+                font-size: 8vw;
+                margin-right: 1rem;
+                writing-mode: vertical-rl;
+                color: white;
+                font-family: 'portico-regular';
+                font-weight: 400;
+                opacity: 0.3;
+            }
+    
+            .section-desc {
+                @include d-flex(column, center, center);
+        
+                color: white;
+                width: 45vw;
+                text-align: justify;
+
+                h4 {
+                    font-weight: 500;
+                    font-size: 1.4vw;
+                    align-self: flex-start;
+                }
+        
+                p {
+                    margin-block: 1rem;
+                    line-height: 1.1rem;
+                }
+            }
+
+            .section-vector__art img {
+                max-width: 30vw;
+                width: auto;
+            }
+        }
+    }
+
+    .ellispe-01 {
+       position: absolute;
+       top: -5vw;
+        
+       width: 100vw;
+       height: 10vw;
+       background-color: $primary-color-light;
+       border-radius: 50%;
+    }
+}
+
+// Container for medium sized screen
+
+.container-medium {
+    .container-back, .container-front {
+        .content {
+            justify-content: center !important;
+
+            .section-vector__art {
+                display: none !important;
+            }
+        }
+    }
+}
+
+
+// Container for Mobile
+.container-mobile {
+    .ellispe-01 {
+        top: -6vh;
+        height: 12vh;
+     }
+
+    .container-back, .container-front {
+        margin-top: 9vh;
+
+        .content {
+            padding-inline: 1rem;
+            flex-direction: column;
+            justify-content: flex-start !important;
+
+            .section-vector__art {
+                display: none !important;
+            }
+
+            .section-title {
+                writing-mode: unset;
+                margin-bottom: 1rem;
+                font-size: 14vw;
+                opacity: .4;
+            }
+
+            .section-desc {
+                width: auto;
+
+                h4 {
+                    font-size: 5vw;
+                }
+
+                p {
+                    margin-block: .5rem;
+                    line-height: normal;
+                    font-size: 3.4vw;
+                }
+            }
+        }
+    }
+}

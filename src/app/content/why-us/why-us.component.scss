@@ -1,0 +1,155 @@
+@import '../../../global.scss';
+
+.container {
+    @include d-flex(column, center, flex-start);
+    position: relative;
+    padding-inline: 5.4rem;
+
+    // Circles in the bg
+    .wavy-divider {
+        position: absolute;
+        top: -2px;
+        left: 0;
+        width: 100vw;
+        line-height: 0;
+
+        svg {
+            width: 100%;
+            height: 5vw;
+
+            path { fill: $primary-color-light; }
+        } 
+    }
+
+    .circle {
+        position: absolute;
+
+        display: inline-block;
+        width: var(--area);
+        height: var(--area);
+        border-radius: 50%;
+        background-color: $primary-color-light;
+        opacity: .1;
+        z-index: -1;
+    }
+
+    .content {
+        width: 100%;
+        margin-top: 4vw;
+    
+        .perk-cards {
+            @include d-flex(row, space-between, flex-start);
+            margin-top: 6vw;
+            width: 100%;
+    
+            .perk-card {
+                @include d-flex(column, center, flex-start);
+                width: 25rem;
+                padding: 2rem 1.5rem;
+                border-radius: 30px;
+                transition: box-shadow .3s ease;
+                
+                &:hover { box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important; }
+                * { margin-block: 6px; }
+
+                .perk-card-pivot {
+                    position: absolute;
+                    top: -6px;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 30px;
+                    background-color: $primary-color-light;
+                    opacity: .08;
+                    pointer-events: none;
+                }
+
+                .card-icon {
+                    width: 5rem;
+                }
+    
+                .card-index {
+                    font-size: 14px;
+                    font-weight: 600;
+                    letter-spacing: .5px;
+                    color: $muted-text;
+                }
+    
+                .card-title {
+                    font-size: 1.6vw;
+                }
+    
+                .card-desc {
+                    font-size: 1.2vw;
+                    color: $muted-text;
+                    font-weight: 500;
+                    line-height: 1.4vw;
+                }
+            }
+        }
+    }
+}
+
+// View for mobile screen
+.container-mobile {
+    padding-inline: 2rem;
+
+    .wavy-divider {
+        top: -1px;
+        width: calc(100% + 69px);
+
+        svg {
+            height: 10vw;
+        } 
+    }
+
+    .circle-01 {
+        width: 40vw;
+        height: 40vw;
+    }
+
+    .content {
+        .perk-cards {
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+
+            .perk-card {
+                flex: 0 0 90vw;
+                border-radius: 5vw;
+                padding-inline: 1rem;
+                scroll-snap-align: start;
+
+                &:hover {
+                    box-shadow: none !important;
+                }
+
+                .perk-card-pivot {
+                    display: none;
+                }                
+    
+                .card-icon {
+                    width: 20vw;
+                }
+    
+                .card-index {
+                    font-size: 5vw;
+                }
+    
+                .card-title {
+                    font-size: 6vw;
+                }
+    
+                .card-desc {
+                    width: 80%;
+                    font-size: 4vw;
+                    line-height: normal;
+                    text-align: justify;
+                }
+            }
+
+            .perk-card-active {
+                box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important; 
+            }
+        }
+    }
+}

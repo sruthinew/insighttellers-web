@@ -1,0 +1,69 @@
+<div class="container" [ngClass]="{'p-mobile': isMobile}">
+    <div class="top-nav">
+        <div class="app-logo" (click)="navigateToPanel()">
+            <img src="assets/icon/favicon.png" alt="logo">
+            <span>Insight</span> Tellers
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="illustartion-card" [ngClass]="{'d-none': isMobile}">
+            <div class="glass-card">
+                <h1>Insights <br> to fuel <br> your drive!</h1>
+            </div>
+        </div>
+        <div class="signup-card" [ngClass]="{'is-mobile': isMobile}">
+            <div class="card-header">
+                <h1 class="card-title">Join our panel</h1>
+                <p class="card-text">Already have an account? <span>Log in</span></p>
+            </div>
+
+            <form [formGroup]="userRegisterForm" class="form-group" (ngSubmit)="registerUser()">
+                <div class="input-group-inline">
+                    <div class="input-group">
+                        <span class="input-icon ri-user-line"></span>
+                        <input appTextInput type="text" name="first_name" placeholder="First name"
+                            formControlName="first_name">
+                    </div>
+                    <div class="input-group">
+                        <span class="input-icon ri-user-line"></span>
+                        <input appTextInput type="text" name="last_name" placeholder="Last name"
+                            formControlName="last_name">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <span class="input-icon ri-mail-line"></span>
+                    <input appTextInput type="email" name="email" placeholder="Email"
+                        formControlName="email">
+                </div>
+                <div class="input-group">
+                    <span class="input-icon ri-key-line"></span>
+                    <input appTextInput [type]="passwordVisible ? 'text' : 'password'" name="password" placeholder="Password"
+                        formControlName="password">
+                    <span class="input-icon input-icon-right"
+                        [ngClass]="passwordVisible ? 'ri-eye-line' : 'ri-eye-off-line'"
+                        (click)="passwordVisible = !passwordVisible">
+                    </span>
+                    <p class="hint-text place-right">Forgot password?</p>
+                </div>
+                <button type="submit" class="button">
+                    Get started
+                </button>
+            </form>
+
+            <div class="card-footer">
+                <div class="divider">
+                    <hr>
+                    <span>OR</span>
+                    <hr>
+                </div>
+                <div class="social-btns">
+                    <div class="social-btn" (click)="googleRedirect()">
+                        <img src="assets/icon/google-icon.png" alt="flaticon - freepik">
+                        <p>Sign in with Google</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,87 @@
+@import '../../../global.scss';
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.container {
+    position: relative;
+    padding-inline: 5.4rem;
+    @include d-flex(column, space-around, center);
+
+    .header {
+        text-align: center;
+
+        .content-title {
+            font-weight: 500;
+            font-size: 3rem;
+        }
+
+        .content-desc {
+            font-size: .9rem;
+            font-weight: 500;
+            margin-top: 1rem;
+            line-height: 1.4rem;
+        }
+    }
+
+    .content {
+        @include d-flex(row, center, center);
+        width: 100%;
+
+        // * { margin-inline: 2rem; }
+
+        .vector {
+            margin-inline: 2rem;
+            img {
+                width: 28vw;
+                height: auto;   
+            }
+        }
+
+        .form-group {
+            width: 100%;
+            margin-inline: 2rem;
+            flex: .7;
+
+            div.button {
+                width: 20%;
+                font-size: 1em;
+            }
+        }
+
+    }
+}
+
+// View for medium screens
+.content-medium {
+    .vector {
+        display: none !important;
+    }
+}
+
+// View for mobile screens
+.container-mobile {
+    padding-inline: 2rem;
+    justify-content: center;
+
+    .header {
+        margin-bottom: 3rem;
+
+        .content-desc {
+            font-size: 3.5vw;
+
+            br {
+                display: none;
+            }
+        }
+    }
+
+    .content {
+        .form-group {
+            flex: none;
+        }
+    }
+}

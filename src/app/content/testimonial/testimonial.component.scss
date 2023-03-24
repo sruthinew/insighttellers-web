@@ -1,0 +1,155 @@
+@import '../../../global.scss';
+
+.container {
+    @include d-flex(column, flex-start, flex-end);
+    position: relative;
+    background-color: $primary-color-light;
+
+    .content {
+        width: 100%;
+        color: $primary-white;
+        text-align: end;
+        margin-top: 4vw;
+        margin-bottom: 6vw;
+        padding-inline: 5.4rem;
+    }
+
+    .cards {
+        @include d-flex(row, center, center);
+        width: 100%;
+        padding-block: 2rem;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
+        .card {
+            position: relative;
+            z-index: 2;
+            width: 40vw;
+            min-width: 40vw;
+            padding: 1.8rem 2rem;
+            border-radius: 2rem;
+            margin-inline: 2rem;
+
+            .card-body {
+
+                .card-profile {
+                    @include d-flex(row, flex-start, center);
+                    margin-top: -1rem;
+                    margin-bottom: 1.2rem;
+                    position: relative;
+                
+                    img {
+                        position: absolute;
+                        top: -2.5rem;
+                        width: 6rem;
+                        border-radius: 50%;
+                        box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+                    }
+    
+                    .card-info {
+                        margin-inline-start: 7rem;
+                        color: $primary-white;
+    
+                        span {
+                            opacity: .7;
+                            font-size: 1.2vw;
+                        }
+                    }
+    
+                }
+    
+                p {
+                    color: $primary-white;
+                    line-height: 1.4rem;
+                    font-size: 1.2vw;
+                }
+            }
+        }
+
+        .card-active {
+            z-index: 1 !important;
+
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.1) -100%, rgba(255, 255, 255, 0.1) 96%);
+
+            box-shadow: 0 .5rem 1rem rgba(0,0,0,.15), -0 -.2rem 1rem rgba(0,0,0,.10) !important;
+            backdrop-filter: blur(8.5px);
+            -webkit-backdrop-filter: blur(8.5px);
+            border: 1px solid linear-gradient(145deg, rgba(255, 255, 255, .5) 0%, rgba(255, 255, 255, .4), 100%);
+        }
+    }
+
+    .nav-btns {
+        @include d-flex(row, center, center);
+        align-self: center;
+        margin-bottom: 2rem;
+
+        .slider-btn {
+            width: .5rem;
+            height: .5rem;
+            background-color: $primary-white;
+            border-radius: 50%;
+            margin-inline: .6rem;
+            cursor: pointer;
+        }
+
+        .slider-btn-active {
+            width: .8rem;
+            height: .8rem;
+            opacity: 0.4;
+        }
+    }
+}
+
+// View for mobile screens
+.container-mobile {
+    align-items: unset;
+    justify-content: center;
+    margin-top: 2rem;
+
+    .content {
+        padding-inline: 2rem;
+        text-align: start;
+
+        .section-subtitle {
+            width: 80%;
+        }
+    }
+
+    .cards {
+        padding-block: 2rem 2rem;
+
+        .card {
+            flex: 0 0 70%;
+
+            .card-body {
+                .card-profile {
+                    flex-direction: column;
+
+                    img {
+                        top: -11vw;
+                        width: 22vw;
+                    }
+    
+                    .card-info {
+                        margin-inline-start: 0;
+                        margin-top: 3rem;
+                        text-align: center;
+    
+                        span {
+                            font-size: 3.5vw;
+                        }
+                    }
+    
+                }
+    
+                p {
+                    line-height: normal;
+                    font-size: 4vw;
+                    text-align: justify;
+                }
+            }
+        }
+    }
+}

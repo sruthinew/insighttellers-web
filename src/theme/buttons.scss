@@ -1,0 +1,65 @@
+@import './colors.scss';
+@import './mixins.scss';
+
+.button {
+    @include d-flex(row, center, center);
+    width: 100%;
+
+    cursor: pointer;
+    outline: none;
+    border: none;
+
+    background-color: $primary-color;
+    padding: 1rem 1.8rem;
+    font-size: 1.2rem;
+    color: white;
+    border-radius: 1.8rem;
+
+    transition: background-color 0.3s ease;
+
+    &:hover {
+        background-color: $primary-color-light;
+
+        i, span {
+            transform: translateX(4px);
+        }
+    }
+    
+    &:disabled {
+        backdrop-filter: grayscale(.1);
+        cursor: not-allowed;
+    }
+
+    i, span {
+        margin-left: .5rem;
+        font-size: 1.6vw;
+        transition: transform 0.3s ease;
+    }
+
+    @media only screen and (max-width: 599.98px) and (orientation: portrait) {
+        font-size: 5vw;
+
+        i, span {
+            font-size: 5.5vw;
+        }
+    }
+}
+
+.social-btn {
+    @include d-flex(row, center, center);
+    padding-inline: 1.3rem;
+    padding-block: .8rem;
+    border-radius: 1.8rem;
+    border: 1px solid $color-inactive;
+    cursor: pointer;
+
+    img {
+        width: 1.8rem;
+        margin-right: 1rem;
+    }
+
+    p {
+        font-size: .9rem;
+        font-weight: 500;
+    }
+}

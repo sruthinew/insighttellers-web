@@ -1,0 +1,44 @@
+<div class="container" [ngClass]="{'container-mobile': (isScreen == 'mobile')}">
+    <div class="heading-text">
+        <div class="we-are">
+            <hr>
+            <span>we are</span>
+        </div>
+        <div [appAnimate]="'moveUp'" class="main-text">
+            <h1><span class="primary-color">Insight</span> Tellers</h1>
+            <span class="tagline">Insights to fuel your drive!</span>
+        </div>
+        <div [appAnimate]="'moveUp'" class="carousel">
+            <div #animateSliderShape id="animateSliderShape" class="carousel-counter-container"></div>
+            <div class="carousel-text-container">
+                <div #textSliderX id="text-slider-horizontal">
+                    <p class="carousel-text">Tap on Business, Customers and Trends with Better Insights.</p>
+                    <p class="carousel-text">Peoples opinion matters to understand human lives.</p>
+                    <p class="carousel-text">Surveys that help develop informed insights.</p>
+                    <p class="carousel-text">Expect Quick, Reliable, Real and Affordable insights!</p>
+                    <!-- cloning the 1st element for infinite animation kinda stuff -->
+                    <p class="carousel-text">Tap on Business, Customers and Trends with Better Insights.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="button" [routerLink]="['/join-our-panel']" style="margin-top: 1rem;">
+            Join Our Panel
+            <!-- <span class="material-symbols-outlined">arrow_right_alt</span> -->
+            <i class="ri-arrow-right-fill"></i>
+        </div>
+    </div>
+
+    <div [appAnimate]="'moveUp'" class="vector-content">
+        <!-- <app-illustration-home01></app-illustration-home01> -->
+
+        <div #vectorSlider class="vector-slider">
+            <img class="" src="assets/vectors/data-analysis.webp" alt="">
+            <img class="" src="assets/vectors/customer-opinion.webp" alt="">
+            <img class="" src="assets/vectors/research-people.webp" alt="">
+            <img class="" src="assets/vectors/speed.webp" alt="">
+            <!-- cloning the 1st element for infinite animation kinda stuff -->
+            <img class="" src="assets/vectors/data-analysis.webp" alt="">
+        </div>
+    </div>
+</div>

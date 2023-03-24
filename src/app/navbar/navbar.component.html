@@ -1,0 +1,26 @@
+<nav class="navbar-stickyly-active" [ngClass]="{'navbar-mobile': isMobile}">
+    <div class="app-logo" title="Insight Tellers" [routerLink]="['']">
+        <img src="assets/icon/favicon.png" alt="logo">
+        <span>Insight</span> Tellers
+    </div>
+    <i class="ri-menu-line" id="toggle-sidebar" (click)="toggleSidebar()"></i>
+    <div class="nav-links-container">
+        <span #activeLinkMarker class="nav-link__active"></span>
+        <div #navLinkList class="nav-links">
+            <!-- <a (click)="switchNavLink($event)" class="nav-link nav-link-active" link-index="0" link-data="landing-page" title="Home">home</a>
+            <a class="nav-link" link-index="1" link-data="about-us-page" href="#about-us-page" title="about us">about us</a>
+            <a class="nav-link" link-index="2" link-data="why-us-page" href="#why-us-page" title="why us">why us</a>
+            <a class="nav-link" link-index="3" link-data="testimonial-page" href="#testimonial-page" title="testimonial">testimonial</a>
+            <a class="nav-link" link-index="4" link-data="our-services-page" href="#our-services-page" title="services">services</a>
+            <a class="nav-link" link-index="5" link-data="portfolio-page" href="#portfolio-page" title="research portfolio">research portfolio</a>   
+            <a class="nav-link" link-index="6" link-data="contact-us-page" href="#contact-us-page" title="contact us">RFQ</a> -->
+            <a (click)="switchNavLink($event)" class="nav-link nav-link-active" link-index="0" link-data="landing-page" title="Home">home</a>
+            <a (click)="switchNavLink($event)" link-index="1" class="nav-link" href="#about-us-page" title="about us">about us</a>
+            <a (click)="switchNavLink($event)" link-index="2" class="nav-link" href="#why-us-page" title="why us">why us</a>
+            <a (click)="switchNavLink($event)" link-index="3" class="nav-link" href="#testimonial-page" title="testimonial">testimonial</a>
+            <a (click)="switchNavLink($event)" link-index="4" class="nav-link" href="#our-services-page" title="services">services</a>
+            <a (click)="switchNavLink($event)" link-index="5" class="nav-link" href="#portfolio-page" title="research portfolio">research portfolio</a>   
+            <a (click)="switchNavLink($event)" link-index="6" class="nav-link" href="#contact-us-page" title="contact us">RFQ</a>
+        </div>
+    </div>
+</nav>

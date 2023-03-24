@@ -1,0 +1,149 @@
+@import '../../../global.scss';
+
+.container {
+    background-color: #2c2c2c;
+    padding: 4rem 8rem;
+    padding-bottom: 0;
+    color: $primary-white;
+
+    .header {
+        @include d-flex(row, space-between, flex-start);
+        
+        .logo {
+            font-size: 2.5vw;
+            font-weight: bold;
+            margin-right: 8rem;
+
+            img {
+                width: 4vw;
+            }
+
+            span {
+                color: $primary-color;
+            }
+        }
+
+        .info {
+            flex: 1;
+
+            .info-tab {
+                margin-bottom: 1.5rem;
+
+                .divider {
+                    width: 100%;
+                    height: .2px;
+                    background-color: $primary-white;
+                    opacity: .3;
+                    margin-block: 1rem;
+                }
+
+                .title {
+                    font-size: 1.6vw;
+                }
+
+                .item, p {
+                    font-weight: lighter;
+                    font-size: 1.2vw;
+                }
+
+                .item {
+                    @include d-flex(row, flex-start, center);
+                    margin-bottom: 1rem;
+
+                    i {
+                        margin-right: 10px;
+                    }
+                }
+            }
+        }
+    }
+
+    .footer {
+        @include d-flex(row, space-between, center);
+        padding-block: 2rem;
+
+        .socials {
+            @include d-flex(row, center, center);
+            font-size: 1.6vw;
+
+            a {
+                text-decoration: none;
+                color: $primary-white;
+
+                .social-btn {
+                    @include d-flex(row, center, center);
+    
+                    padding: .7rem .5rem;
+                    margin-inline: .5rem;
+                    border-radius: 10px;
+                    cursor: pointer;
+                    transition: background-color .3s ease;
+                    
+                    &:hover {
+                        background-color: rgba(255 255 255 / 10%);
+                    }
+                }
+            }
+        }
+
+        span.copyright-text {
+            font-size: 1.2vw;
+            font-weight: lighter;
+        }
+    }
+}
+
+// --Mobile View
+.container-mobile {
+    padding: 2rem 2rem;
+
+    .header {
+        flex-direction: column !important;
+        align-items: center;
+
+        .logo {
+            @include d-flex(column, center, center);
+            width: 100%;
+            font-size: 8vw;
+            margin-right: 0;
+            margin-bottom: 1.4rem;
+
+            img {
+                width: 12vw;
+                margin-bottom: 3.2vw;
+            }
+        }
+
+        .info {
+            width: 100%;
+
+            .info-tab {
+                .title {
+                    font-size: 6vw;
+                }
+
+                .divider {
+                    margin-block: 2.5vw;
+                }
+
+                .item, p {
+                    font-size: 4vw;
+                    font-weight: 400;
+                }
+            }
+        }
+    }
+
+    .footer {
+        flex-direction: column;
+        
+        .socials {
+            font-size: 7vw;
+            margin-bottom: 1vw;
+        }
+
+        span.copyright-text {
+            font-size: 3vw;
+        }
+    }
+}

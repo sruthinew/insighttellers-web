@@ -1,0 +1,188 @@
+@import '../../global.scss';
+@import url('https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css');
+
+.container {
+    padding-inline: 5.4rem;
+    height: 100vh;
+    overflow-y: hidden;
+
+    .top-nav {
+        @include d-flex(row, flex-start, center);
+        margin-top: 2rem;
+    }
+
+    .content {
+        @include d-flex(row, center, center);
+        height: 80vh;
+        margin-top: 3rem;
+        border-radius: 2rem;
+        padding-inline: 1rem;
+        background-color: #ffffff;
+
+        .select-form-type {
+            text-align: center;
+            
+            .heading-text {
+                font-size: 3vw;
+            }
+            
+            .cards {
+                @include d-flex(row, center, center);
+                margin-top: 3rem;
+
+                .card {
+                    width: 30vw;
+                    border-radius: 1rem;
+                    margin-inline: 2rem;
+                    box-shadow: 0 .2rem .4rem rgba(0,0,0,.1) !important;
+                    cursor: pointer; 
+                    padding: 2rem;
+                    border: 1px solid $primary-color;
+
+                    .card-title {
+                        margin-bottom: 1rem;
+                    }
+                }
+            }
+        }
+
+        .illustartion-card {
+            @include d-flex(row, center, center);
+            width: 50%;
+            height: 76vh;
+
+            border-radius: 1.8rem;
+            background-color: #4158D0;
+            background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+
+            .glass-card {
+                @include d-flex(column, center, center);
+                width: 80%;
+                height: 80%;
+                border-radius: 1rem;
+                backdrop-filter: blur(5.1px);
+                background: rgba(255, 255, 255, 0.2);
+                box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+                padding-inline: 1rem;
+                color: $primary-white;
+
+                h1 {
+                    font-size: 5vw;
+                }
+
+                p {
+                    font-size: 1.2vw;
+                    align-self: flex-start;
+                }
+            }
+        }
+
+        .signup-card {
+            @include d-flex(column, flex-start, flex-start);
+            width: 50%;
+            height: 76vh;
+            padding-inline: 3rem;
+            margin-top: 2rem;
+
+            .card-header {
+                .card-title {
+                    font-size: 1.8rem;
+                    margin-bottom: .5rem;
+                }
+
+                .card-text {
+                    font-size: 1rem;
+                    font-weight: 500;
+
+                    span {
+                        cursor: pointer;
+                        font-weight: bold;
+                        color: $primary-color;
+                    }
+                }
+            }
+
+            .form-group {
+                width: calc(100% - 4vw);
+                margin-top: 2rem;
+
+                .button {
+                    margin-top: 3rem;
+                }
+            }
+
+            .card-footer {
+                width: calc(100% - 4vw);
+                
+                .divider {
+                    @include d-flex(row, center, center);
+                    opacity: .6;
+                    
+                    width: 100%;
+                    margin-block: 1rem;
+
+                    hr {
+                        width: 100%;
+                        height: .5px;
+                        border: none;
+                        background-color: $primary-black;
+                    }
+
+                    span {
+                        margin-inline: 1rem;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// -- Mobile Views
+.d-none {
+    display: none;
+}
+
+.p-mobile {
+    padding: 1rem;
+
+    .top-nav {
+        margin-top: 0;
+        align-items: center;
+
+        .app-logo {
+            margin-inline: auto;
+        }
+    }
+
+    .content {
+        height: 100vh;
+        align-items: flex-start;
+        border-radius: 1.5rem;
+        margin-top: 1rem;
+
+        .signup-card {
+            align-items: center;
+        }
+    }
+}
+
+.is-mobile {
+    width: 100% !important;
+    padding-inline: 1rem !important;
+
+    .card-header {
+        text-align: center;
+    }
+
+    .form-group {
+        width: 100% !important;
+
+        .input-group-inline {
+            flex-direction: column;
+
+            .input-group:first-of-type {
+                margin-right: 0;
+            }
+        }
+    }
+}

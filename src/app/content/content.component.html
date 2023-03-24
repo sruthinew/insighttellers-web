@@ -1,0 +1,56 @@
+<div class="sidebar-container">
+    <div class="sidebar">
+        <div #navLinkList class="nav-links" id="nav-link-mobile">
+            <a (click)="scrollToView($event)" class="nav-link nav-link__active" link-data="landing-page">home</a>
+            <a (click)="scrollToView($event)" class="nav-link" href="#about-us-page" link-data="about-us-page">about us</a>
+            <a (click)="scrollToView($event)" class="nav-link" href="#why-us-page" link-data="why-us-page">why us</a>
+            <a (click)="scrollToView($event)" class="nav-link" href="#testimonial-page" link-data="testimonial-page">testimonial</a>
+            <a (click)="scrollToView($event)" class="nav-link" href="#our-services-page" link-data="our-services-page">services</a>
+            <a (click)="scrollToView($event)" class="nav-link" href="#portfolio-page" link-data="portfolio-page">research portfolio</a>   
+            <a (click)="scrollToView($event)" class="nav-link" href="#contact-us-page" link-data="contact-us-page">RFQ</a>
+        </div>
+    </div>
+
+    <div class="root-container">
+        <app-navbar class="app-navbar-sticky" #appNavbar (navLinkEvent)="scrollToView($event)" (toggleSidebarEvent)="toggleSidebarEvent()"></app-navbar>
+    
+        <div class="root-content">
+            <header #landingSection id="landing-page">
+                <app-landing class="landing-page"></app-landing>
+            </header>
+        
+            <section #aboutUsSection id="about-us-page">
+                <app-about-us></app-about-us>
+            </section>
+        
+            <section #ourValuesSection id="our-values-page" style="height: 50vh !important; min-height: 50vh !important;">
+            </section>
+    
+            <section #whyUsSection id="why-us-page">
+                <app-why-us></app-why-us>
+            </section>
+    
+            <!-- <section class="why-us-cover-page"></section> -->
+    
+            <section #testimonialSection class="testimonial-page" id="testimonial-page" style="height: 100vh;">
+                <app-testimonial></app-testimonial>
+            </section>
+    
+            <section class="our-services-page"  id="our-services-page" style="height: auto; min-height: auto; margin-bottom: 4rem">
+                <app-our-services [isCardActive]="isCardActive"></app-our-services>
+            </section>
+    
+            <section class="portfolio-page height-auto-mobile" id="portfolio-page">
+                <app-portfolio></app-portfolio>
+            </section>
+    
+            <section class="contact-us-page" id="contact-us-page" style="height: auto !important; margin-bottom: 1rem;">
+                <app-contact-us></app-contact-us>
+            </section>
+    
+            <footer class="footer-page">
+                <app-footer></app-footer>
+            </footer>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,99 @@
+@import './colors.scss';
+
+.input-group {
+    position: relative;
+    margin-block-end: 1rem;
+
+    span {
+        --size: 2.6vh;
+
+        position: absolute;
+        top: calc(50% - (var(--size) / 2));
+        left: 2vh;
+
+        font-size: var(--size);
+        color: $color-inactive;
+        transition: color .3s ease;
+    }
+
+    span.textarea-icon {
+        --size: 2.6vh;
+
+        position: absolute;
+        top: calc(4.5% + (var(--size) / 2));
+        left: 2vh;
+
+        font-size: var(--size);
+        color: $color-inactive;
+    }
+
+    input, textarea {
+        width: calc(100% - 8.2vh);
+        padding: .8rem 1rem;
+        padding-left: 6vh;
+        outline: none;
+        border: 1px solid $color-inactive;
+        border-radius: 1.8rem;
+        background: transparent;
+        font-size: 2vh;
+        font-family: 'Montserrat';
+        transition: border .3s ease;
+    }
+
+    input {
+        height: 30px;
+
+        &::-webkit-autofill {
+            background: transparent;
+        }
+    }
+
+    textarea {
+        resize: none;
+    }
+
+    .hint-text {
+        color: $primary-color;
+        font-size: .8rem;
+        font-weight: 500;
+        cursor: pointer;
+    }
+
+    .input-icon-right {
+        cursor: pointer;
+        left: unset !important;
+        right: 2vh !important;
+    }
+
+    .place-right {
+        position: absolute;
+        right: 0 !important;
+        margin-top: .5rem;
+    }
+}
+
+.input-group-inline {
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .input-group:first-of-type {
+        margin-right: 1rem;
+    }
+
+    .input-group {
+        width: 100%;
+    }
+}
+
+.input-group-active {
+    input, textarea {
+        border-color: $primary-color !important;
+    }
+
+    span, .input-icon {
+        color: $primary-color !important;
+    }
+}

@@ -1,0 +1,32 @@
+<div class="container" [ngClass]="{'container-mobile': (isScreen == 'mobile')}">
+    <div class="header">
+        <h1 class="container-title">PORTFOLIO</h1>
+        <div class="nav-btns">
+            <i class="ri-arrow-left-circle-fill" (click)="contentPrev()"></i>
+            <i class="ri-arrow-right-circle-fill" (click)="contentNext()"></i>
+        </div>
+    </div>
+    <div #cardList class="content" [ngClass]="{'content-medium': (isScreen == 'medium'), 'swipe-container-portfolio': (isScreen == 'mobile')}">
+        <ng-container *ngIf="(isScreen != 'mobile')">
+            <div class="card" *ngFor="let item of listItems">
+                <div class="card-content">
+                    <div [ngClass]="{'card-active': (item.active == 1), 'card-inactive': (item.active == 2)}">
+                        <h1 class="card-title">{{ item.activeTitle }}</h1>
+                        <p class="card-desc">{{ item.activeContent }}</p>
+                    </div>
+                    <div [ngClass]="{'card-inactive': (item.active == 1), 'card-active': (item.active == 2)}">
+                        <h1 class="card-title">{{ item.inactiveTitle }}</h1>
+                        <p class="card-desc">{{ item.inactiveContent }}</p>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+
+        <ng-container *ngIf="isScreen == 'mobile'">
+            <div class="card card-{{i}}" *ngFor="let card of listItemsForMobile; let i = index" [attr.card-index]="i">
+                <h1 class="card-title">{{ card.title }}</h1>
+                <p class="card-desc">{{ card.content }}</p>
+            </div>
+        </ng-container>
+    </div>
+</div>

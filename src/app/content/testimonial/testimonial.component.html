@@ -1,0 +1,65 @@
+<div class="container" [ngClass]="{'container-mobile': (isScreen == 'mobile')}">
+    <div [appAnimate]="'moveUp'" class="content">
+        <h1 class="section-title">Words of Appreciation!</h1>
+        <p class="section-subtitle">
+            Hey! People are talking about us ... Did you get to hear them?
+        </p>
+    </div>
+    <div [appAnimate]="'moveUp'" #cardList class="cards">
+        <div class="card card-1">
+            <div class="card-body" data-active="false">
+                <div class="card-profile">
+                    <img src="assets/people/02.webp" alt="Unsplash Images">
+                    <div class="card-info">
+                        <h1>Usha Sharma</h1>
+                        <span>Software developer, Google Inc.</span>
+                    </div>
+                </div>
+                <p>
+                    The employees are friendly and joyful to work with. They are proactive and provide all necessary
+                    support ASAP!
+                </p>
+            </div>
+        </div>
+        <div class="card card-active card-2">
+            <div class="card-body" data-active="true">
+                <div class="card-profile">
+                    <img src="assets/people/04.webp" alt="Unsplash Images">
+                    <!-- <i class="ri-double-quotes-l"></i> -->
+                    <div class="card-info">
+                        <h1>John Doe</h1>
+                        <span>Software developer, Google Inc.</span>
+                    </div>
+                </div>
+                <p>
+                    We needed sample in Pakistan and Bangladesh where most of the companies either refused or were
+                    costly, I search Insight Tellers on Google and reached out to them, their costs were reasonable and
+                    authentic data made me even happier. I will use them again in my projects.
+                </p>
+            </div>
+        </div>
+        <div class="card card-3">
+            <div class="card-body" data-active="false">
+                <div class="card-profile">
+                    <img src="assets/people/01.webp" alt="Unsplash Images">
+                    <div class="card-info">
+                        <h1>Lisa Watson</h1>
+                        <span>Software developer, Google Inc.</span>
+                    </div>
+                </div>
+                <p>
+                    I have used them for tough audiences, and they have successfully delivered what they committed to.
+                    Keep up the good work.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="nav-btns">
+        <div class="slider-btn" data-index="1" (click)="initSliderAnimation($event)"></div>
+        <div class="slider-btn slider-btn-active" data-index="2" (click)="initSliderAnimation($event)"></div>
+        <div class="slider-btn" data-index="3" (click)="initSliderAnimation($event)"></div>
+
+        <!-- <span class="material-symbols-outlined btn-left" (click)="prevCard()">arrow_back</span>
+        <span class="material-symbols-outlined" (click)="nextCard()">arrow_forward</span> -->
+    </div>
+</div>

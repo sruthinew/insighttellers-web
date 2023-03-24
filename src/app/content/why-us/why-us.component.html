@@ -1,0 +1,48 @@
+<div class="container why-us-container" [ngClass]="{'container-mobile': (isScreen == 'mobile')}">
+    <div class="wavy-divider">
+        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+        </svg>
+    </div>
+    <div #circle01 class="circle circle-01" style="--area: 20vw; top: 18%; left: 15%;"></div>
+
+    <div class="content">
+        <h1 [appAnimate]="'moveUp'" #sectionTitle class="section-title">Why choose us?</h1>
+        <p [appAnimate]="'moveUp'" class="section-subtitle">
+            While you are thinking, “Why US?” we would present you, Why should be Us! <br>
+            Expect Quality, Affordability, Lightening Speed and Commitment.
+        </p>
+        <div class="perk-cards">
+            <div class="perk-card">
+                <img src="assets/vectors/experts.webp" alt="Card Icon" class="card-icon" style="margin-left: -11px;">
+                <span class="card-index">01</span>
+                <h4 class="card-title">Experienced Experts</h4>
+                <p class="card-desc">
+                    We believe experience of working in the right direction matters and experience years is just a figure!
+                    Being into the industry since 15+ years surely give immense experience to claim and believe that!
+                </p>
+            </div>
+    
+            <div class="perk-card" style="position: relative;">
+                <div #perkCard02 class="perk-card-pivot"></div>
+                <img src="assets/vectors/clients.webp" alt="Card Icon" class="card-icon">
+                <span class="card-index">02</span>
+                <h4 class="card-title">Content Clients</h4>
+                <p class="card-desc">
+                    Contentment with happiness is a great gain! Explore our services, try them for yourself and own your
+                    story of finding contentment with happiness!
+                </p>
+            </div>
+    
+            <div class="perk-card">
+                <img src="assets/vectors/team.webp" alt="Card Icon" class="card-icon">
+                <span class="card-index">03</span>
+                <h4 class="card-title">Tremendous Team</h4>
+                <p class="card-desc">
+                    Team that works together stays together. It is a blessing to have vast partners alongside and
+                    hardworking units, leaving no stone unturned in matching the quality needs.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
