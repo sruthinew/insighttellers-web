@@ -1,16 +1,16 @@
 pipeline {
     agent any
     environment{
-        registry = "imbb/firebase-frontend"
-        registryCredential = "docker"
+        registry = "ni3devops/my-website"
+        registryCred = "docker-cred"
         dockerImage = ''
     }
     stages {
         stage('Building Dockerimage') {
             steps{
                 script {
-                    docker.withRegistry( '', registryCredential ) {
-                        dockerImage = docker.build( registry + ":revamp-$BUILD_NUMBER", "--build-arg BUILD_CMD=$BUILD_CMD -f Dockerfile .")
+                    docker.withRegistry( '', registryCred ) {
+                        dockerImage = docker.build( registry + ":insighttellers-$BUILD_NUMBER", "-f Dockerfile .")
                     }
                 }
             }
@@ -18,7 +18,7 @@ pipeline {
         stage('Pushing Dockerimage Into Dockerhub') {
             steps{
                 script {
-                    docker.withRegistry( '', registryCredential ) {
+                    docker.withRegistry( '', registryCred ) {
                         dockerImage.push()
                     }
                 }
@@ -26,22 +26,22 @@ pipeline {
         }
         stage('Remove Unused Dockerimage') {
             steps{
-                sh "docker rmi $registry:revamp-$BUILD_NUMBER"
+                sh "docker rmi $registry:insighttellers-$BUILD_NUMBER"
            }
         }
         stage('Secrets Copy') {
             steps{
-                    withCredentials([file(credentialsId: 'imbbpem', variable: 'imbbpem')]) {
-                        sh "cp \$imbbpem imbb.pem"
+                    withCredentials([file(credentialsId: 'insighttellers-key', variable: 'insighttellers-key')]) {
+                        sh "cp \$insighttellers-key insighttellers.pem"
                 }
             }
         }
-        stage('Kubernetes Deploy') {
+        stage('docker Deploy') {
             steps{
-                sh 'chmod 400 imbb.pem'
-                sh 'ssh -o StrictHostKeyChecking=no -i imbb.pem ubuntu@52.38.209.186 sudo docker rm -f firebase-frontend-node-revamp'
-                sh 'ssh -o StrictHostKeyChecking=no -i imbb.pem ubuntu@52.38.209.186 sudo docker run --name firebase-frontend-node-revamp --restart=always -p 28080:80 -d $registry:revamp-$BUILD_NUMBER'
-                sh 'ssh -o StrictHostKeyChecking=no -i imbb.pem ubuntu@52.38.209.186 sudo docker system prune -f'
+                sh 'chmod 400 insighttellers.pem'
+                sh 'ssh -o StrictHostKeyChecking=no -i insighttellers.pem ubuntu@54.243.219.236 sudo docker rm -f insighttellers'
+                sh 'ssh -o StrictHostKeyChecking=no -i insighttellers.pem ubuntu@54.243.219.236 sudo docker run --name insighttellers --restart=always -p 80:80 -d $registry:insighttellers-$BUILD_NUMBER'
+                sh 'ssh -o StrictHostKeyChecking=no -i insighttellers.pem ubuntu@54.243.219.236 sudo docker system prune -f'
             }
         }
         stage('Workspace Cleanup') {
