@@ -29,13 +29,7 @@ pipeline {
                 sh "docker rmi $registry:insighttellers-$BUILD_NUMBER"
            }
         }
-        stage('Secrets Copy') {
-            steps{
-                    withCredentials([file(credentialsId: 'my-website-server', variable: 'my-website-server')]) {
-                        sh "cp \$my-website-server my-website-server.pem"
-                }
-            }
-        }
+        
         stage('docker Deploy') {
             steps{
                 sh 'chmod 400 my-website-server.pem'
