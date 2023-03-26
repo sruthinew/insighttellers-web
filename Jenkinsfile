@@ -31,17 +31,17 @@ pipeline {
         }
         stage('Secrets Copy') {
             steps{
-                    withCredentials([file(credentialsId: 'insighttellers-key', variable: 'insighttellers-key')]) {
-                        sh "cp \$insighttellers-key insighttellers.pem"
+                    withCredentials([file(credentialsId: 'my-server-key', variable: 'my-server-key')]) {
+                        sh "cp \$my-server-key my-server-key.pem"
                 }
             }
         }
         stage('docker Deploy') {
             steps{
                 sh 'chmod 400 insighttellers.pem'
-                sh 'ssh -o StrictHostKeyChecking=no -i insighttellers.pem ubuntu@54.243.219.236 sudo docker rm -f insighttellers'
-                sh 'ssh -o StrictHostKeyChecking=no -i insighttellers.pem ubuntu@54.243.219.236 sudo docker run --name insighttellers --restart=always -p 80:80 -d $registry:insighttellers-$BUILD_NUMBER'
-                sh 'ssh -o StrictHostKeyChecking=no -i insighttellers.pem ubuntu@54.243.219.236 sudo docker system prune -f'
+                sh 'ssh -o StrictHostKeyChecking=no -i my-server-key.pem ubuntu@44.198.124.94 sudo docker rm -f insighttellers'
+                sh 'ssh -o StrictHostKeyChecking=no -i my-server-key.pem ubuntu@44.198.124.94 sudo docker run --name insighttellers --restart=always -p 80:80 -d $registry:insighttellers-$BUILD_NUMBER'
+                sh 'ssh -o StrictHostKeyChecking=no -i my-server-key.pem ubuntu@44.198.124.94 sudo docker system prune -f'
             }
         }
         stage('Workspace Cleanup') {
