@@ -10,7 +10,7 @@ pipeline {
             steps{
                 script {
                     docker.withRegistry( '', registryCred ) {
-                        dockerImage = docker.build( registry + ":insighttellers-$BUILD_NUMBER .")
+                        dockerImage = docker.build( registry + ":insighttellers-$BUILD_NUMBER")
                     }
                 }
             }
