@@ -1,49 +1,25 @@
-pipeline {
-    agent any
-    environment{
-        registry = "ni3devops/my-website"
-        registryCred = "docker-cred"
-        dockerImage = ''
-    }
-    stages {
-        stage('Building Dockerimage') {
-            steps{
-                script {
-                    docker.withRegistry( '', registryCred ) {
-                        dockerImage = docker.build( registry + ":insighttellers-$BUILD_NUMBER")
-                    }
-                }
-            }
-        }
-        stage('Pushing Dockerimage Into Dockerhub') {
-            steps{
-                script {
-                    docker.withRegistry( '', registryCred ) {
-                        dockerImage.push()
-                    }
-                }
-            }
-        }
-        stage('Remove Unused Dockerimage') {
-            steps{
-                sh "docker rmi $registry:insighttellers-$BUILD_NUMBER"
-            }
-        }
-        stage('Run Container on Dev Server') {
-            steps {
-                script {
-                    sshagent(['dev-server']) {
-                        sh 'sudo docker rm -f my-app || true'
-                        sh "sudo docker run -p 8080:80 -d --name my-app ni3devops/my-website:insighttellers-${env.BUILD_NUMBER}"
-                        sh 'sudo docker system prune -f'
-                    }
-                }
-            }
-        }
-        stage('Workspace Cleanup') {
-            steps{
-                cleanWs()
-            }
-        }
-    }
+node{
+   stage('SCM Checkout'){
+       git credentialsId: 'git-creds', url: 'https://github.com/devopsni3/insighttellers-web.git'
+   }
+   stage('Build Docker Image'){
+     sh 'docker build -t ni3devops/my-website:insighttellers-$BUILD_NUMBER .'
+   }
+   stage('Push Docker Image'){
+     withCredentials([string(credentialsId: 'docker-pwd', variable: 'dockerHubPwd')]) {
+        sh "docker login -u ni3devops -p ${dockerHubPwd}"
+     }
+     sh 'docker push ni3devops/my-website:insighttellers-$BUILD_NUMBER'
+   }
+   stage('Run Container on Dev Server'){
+     def dockerrm  = 'sudo docker rm -f my-app'  
+     def dockerRun = 'sudo docker run -p 8080:80 -d --name my-app ni3devops/my-website:insighttellers-$BUILD_NUMBER'
+     def dockerprune = 'sudo docker system prune -f'
+     sshagent(['dev-server']) {
+       sh "ssh -o StrictHostKeyChecking=no ec2-user@44.198.124.94 ${dockerrm}"
+       sh "ssh -o StrictHostKeyChecking=no ec2-user@44.198.124.94 ${dockerRun}"
+       sh "ssh -o StrictHostKeyChecking=no ec2-user@44.198.124.94 ${dockerprune}"
+       
+     }
+   }
 }
