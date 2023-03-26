@@ -1,7 +1,4 @@
 node{
-   stage('SCM Checkout'){
-       git credentialsId: 'git-creds', url: 'https://github.com/devopsni3/insighttellers-web.git'
-   }
    stage('Build Docker Image'){
      sh 'docker build -t ni3devops/my-website:insighttellers-$BUILD_NUMBER .'
    }
