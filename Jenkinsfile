@@ -27,13 +27,17 @@ pipeline {
         stage('Remove Unused Dockerimage') {
             steps{
                 sh "docker rmi $registry:insighttellers-$BUILD_NUMBER"
-           }
+            }
         }
-        stage('docker Deploy') {
-            sshagent(['dev-server']) {
-                sh 'ssh -o StrictHostKeyChecking=no ec2-user@44.198.124.94 sudo docker rm -f insighttellers'
-                sh 'ssh -o StrictHostKeyChecking=no ec2-use@44.198.124.94 sudo docker run --name insighttellers --restart=always -p 80:80 -d $registry:insighttellers-$BUILD_NUMBER'
-                sh 'ssh -o StrictHostKeyChecking=no ec2-use@44.198.124.94 sudo docker system prune -f'
+        stage('Run Container on Dev Server') {
+            steps {
+                script {
+                    sshagent(['dev-server']) {
+                        sh 'sudo docker rm -f my-app || true'
+                        sh "sudo docker run -p 8080:80 -d --name my-app ni3devops/my-website:insighttellers-${env.BUILD_NUMBER}"
+                        sh 'sudo docker system prune -f'
+                    }
+                }
             }
         }
         stage('Workspace Cleanup') {
