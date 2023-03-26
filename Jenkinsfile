@@ -32,7 +32,7 @@ pipeline {
         stage('Secrets Copy') {
             steps{
                     withCredentials([file(credentialsId: 'my-website', variable: 'my-website')]) {
-                        sh "cp \$my-my-website.pem"
+                        sh "cp \$my-website my-my-website.pem"
                 }
             }
         }
