@@ -31,10 +31,8 @@ pipeline {
         }
         
         stage('Secrets Copy') {
-            steps{
-                withCredentials([file(credentialsId: 'my-website', variable: 'my-website')]) {
-                    sh "cp \$my-website my-website"
-                }
+            withCredentials([string(credentialsId: 'my-website', variable: 'MY_WEBSITE')]) {
+                sh 'cp -- "$MY_WEBSITE" my-website'
             }
         }
         stage('docker Deploy') {
