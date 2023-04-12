@@ -1,1 +1,50 @@
-
+pipeline {
+    agent any
+    environment{
+        registry = "labs47b/finca360-backend"
+        registryCredential = "local-docker"
+        dockerImage = ''
+        DockerfilePath = "Dockerfile"
+    }
+    stages {
+        stage('sementic-release') {
+            steps{
+                withCredentials(
+                        [   usernamePassword(credentialsId: 'local-docker',
+                            passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME'),
+                            usernameColonPassword(credentialsId: 'labs47bgithub', variable: 'GIT_CREDENTIALS'),
+                        ]
+                    ) {
+                       sh "sed -i -e \"s#IMAGE_NAME#${registry}#g\" .releaserc"
+                       sh "sed -i -e \"s#Dockerfile#${DockerfilePath}#g\" .releaserc"
+                    //    sh "sed -i -e \"s#BUILD_CMD# --build-arg BUILD_CMD=${BUILD_CMD} #g\" .releaserc"
+                       sh " cat .releaserc"
+                       sh "/usr/bin/semantic-release --no-ci --debug"
+                       sh "export `cat version`"
+                }
+            }
+        }
+        stage('Remove Unused Dockerimage') {
+            steps{
+                 sh 'export `cat version` && docker image ls && docker rmi -f $registry:${SEM_VERSION}'
+           }
+        }
+        stage('Secrets Copy') {
+            steps{
+                    withCredentials([file(credentialsId: 'LocalKubernetes', variable: 'LocalKubernetes')]) {
+                        sh "cp \$LocalKubernetes config"
+                }
+            }
+        }
+        stage('Kubernetes Deploy') {
+            steps{
+                sh 'export `cat version` && helm --kubeconfig=config upgrade -i finca-backend ./finca-backend -n $namespace --set image.tag=${SEM_VERSION}'
+            }
+        }
+        stage('Workspace Cleanup') {
+            steps{
+                cleanWs()
+            }
+        }
+    }
+}
