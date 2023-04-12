@@ -38,7 +38,7 @@ pipeline {
         }
         stage('Kubernetes Deploy') {
             steps{
-                sh 'export `cat version` && helm --kubeconfig=config upgrade -i finca-backend ./finca-backend -n $namespace --set image.tag=${SEM_VERSION}'
+                sh helm --kubeconfig=config upgrade -i insighttellers-web-app ./insighttellers-web'
             }
         }
         stage('Workspace Cleanup') {
