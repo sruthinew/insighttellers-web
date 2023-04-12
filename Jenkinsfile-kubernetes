@@ -1,44 +1,45 @@
+
 pipeline {
     agent any
     environment{
-        registry = "labs47b/finca360-backend"
-        registryCredential = "local-docker"
+        registry = "devopsni3/insighttellers"
+        registryCredential = "docker-cred"
         dockerImage = ''
-        DockerfilePath = "Dockerfile"
     }
     stages {
-        stage('sementic-release') {
+        stage('Building Dockerimage') {
             steps{
-                withCredentials(
-                        [   usernamePassword(credentialsId: 'local-docker',
-                            passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME'),
-                            usernameColonPassword(credentialsId: 'labs47bgithub', variable: 'GIT_CREDENTIALS'),
-                        ]
-                    ) {
-                       sh "sed -i -e \"s#IMAGE_NAME#${registry}#g\" .releaserc"
-                       sh "sed -i -e \"s#Dockerfile#${DockerfilePath}#g\" .releaserc"
-                    //    sh "sed -i -e \"s#BUILD_CMD# --build-arg BUILD_CMD=${BUILD_CMD} #g\" .releaserc"
-                       sh " cat .releaserc"
-                       sh "/usr/bin/semantic-release --no-ci --debug"
-                       sh "export `cat version`"
+                script {
+                    docker.withRegistry( '', registryCredential ) {
+                        dockerImage = docker.build( registry + ":app-$BUILD_NUMBER")
+                    }
                 }
             }
         }
-        stage('Remove Unused Dockerimage') {
+        stage('Pushing Dockerimage Into Dockerhub') {
             steps{
-                 sh 'export `cat version` && docker image ls && docker rmi -f $registry:${SEM_VERSION}'
-           }
+                script {
+                    docker.withRegistry( '', registryCredential ) {
+                        dockerImage.push()
+                    }
+                }
+            }
         }
+ //       stage('Remove Unused Dockerimage') {
+ //          steps{
+ //              sh "docker rmi $registry:app-$BUILD_NUMBER"
+ //         }
+ //     }
         stage('Secrets Copy') {
             steps{
-                    withCredentials([file(credentialsId: 'LocalKubernetes', variable: 'LocalKubernetes')]) {
-                        sh "cp \$LocalKubernetes config"
+                    withCredentials([file(credentialsId: 'localkubernetes', variable: 'localkubernetes')]) {
+                        sh "cp \$localkubernetes config"
                 }
             }
         }
-        stage('Kubernetes Deploy') {
+        stage('docker Deploy') {
             steps{
-                sh 'export `cat version` && helm --kubeconfig=config upgrade -i finca-backend ./finca-backend -n $namespace --set image.tag=${SEM_VERSION}'
+            sh 'kubectl --kubeconfig=config apply -f deployment-service.yml}'
             }
         }
         stage('Workspace Cleanup') {
