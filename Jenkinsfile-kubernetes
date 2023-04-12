@@ -39,7 +39,7 @@ pipeline {
         }
         stage('docker Deploy') {
             steps{
-            sh 'kubectl --kubeconfig=config apply -f deployment-service.yml}'
+            sh 'kubectl --kubeconfig=config apply -f deployment-service.yml'
             }
         }
         stage('Workspace Cleanup') {
