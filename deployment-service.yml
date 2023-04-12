@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: nginx-container
-        image: ni3devops/insighttellers
+        image: ni3devops/insighttellers:app-1
 ---
 # Deploy nodePort Services
 apiVersion: v1
