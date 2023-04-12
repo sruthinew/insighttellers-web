@@ -38,7 +38,7 @@ pipeline {
         }
         stage('Kubernetes Deploy') {
             steps{
-                sh helm --kubeconfig=config upgrade -i insighttellers-web-app ./insighttellers-web'
+                'sh helm --kubeconfig=config upgrade -i insighttellers-web-app ./insighttellers-web'
             }
         }
         stage('Workspace Cleanup') {
