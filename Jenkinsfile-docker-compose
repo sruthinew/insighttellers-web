@@ -1,0 +1,50 @@
+pipeline {
+    agent any
+    environment{
+        registry = "devopsni3/insighttellers"
+        registryCredential = "docker-cred"
+        dockerImage = ''
+    }
+    stages {
+        stage('Building Dockerimage') {
+            steps{
+                script {
+                    docker.withRegistry( '', registryCredential ) {
+                        dockerImage = docker.build( registry + ":app-$BUILD_NUMBER")
+                    }
+                }
+            }
+        }
+        stage('Pushing Dockerimage Into Dockerhub') {
+            steps{
+                script {
+                    docker.withRegistry( '', registryCredential ) {
+                        dockerImage.push()
+                    }
+                }
+            }
+        }
+ //       stage('Remove Unused Dockerimage') {
+ //          steps{
+ //              sh "docker rmi $registry:app-$BUILD_NUMBER"
+ //         }
+ //     }
+        stage('Secrets Copy') {
+            steps{
+                    withCredentials([file(credentialsId: 'serverkey', variable: 'serverkey')]) {
+                        sh "cp \$serverkey serverkey.pem"
+                }
+            }
+        }
+        stage('docker-compose Deploy') {
+            steps{
+            sh 'ssh -o StrictHostKeyChecking=no -i serverkey.pem ubuntu@54.197.197.130 "export dockerimage_TAG=app-$BUILD_NUMBER && cd /home/ubuntu/insighttellers-web-docker && docker rm -f insighttellers-web-docker-myapp-1 && docker-compose -f docker-compose.yaml up -d"'
+            }
+        }
+        stage('Workspace Cleanup') {
+            steps{
+                cleanWs()
+            }
+        }
+    }
+}
