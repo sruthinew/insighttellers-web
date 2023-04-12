@@ -24,11 +24,11 @@ pipeline {
                 }
             }
         }
-        stage('Remove Unused Dockerimage') {
-            steps{
-                sh "docker rmi $registry:app-$BUILD_NUMBER"
-           }
-        }
+ //       stage('Remove Unused Dockerimage') {
+ //          steps{
+ //              sh "docker rmi $registry:app-$BUILD_NUMBER"
+ //         }
+ //     }
         stage('Secrets Copy') {
             steps{
                     withCredentials([file(credentialsId: 'serverkey', variable: 'serverkey')]) {
