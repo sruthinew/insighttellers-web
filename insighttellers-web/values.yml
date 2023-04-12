@@ -1,0 +1,47 @@
+# Default values for mono.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+#Name
+name: insighttellers
+#Replicas
+replicaCount: 1
+
+#Images
+image:
+        repository: ni3devops/inisghttellers:latest
+  tag: a-------------------------------9
+  pullPolicy: Always
+
+#Ingress-host
+ingress:
+  host: a-------------------------------9
+
+#ImageSecrets:
+#imagePullSecrets:
+#        - name: dockerregistryi
+        
+#PodsSecurityContext
+securityContext:
+  privileged: false
+
+#Resources
+api:
+  enabled: false
+  #resources:
+   # requests:
+    #  cpu: 2000m
+    #limits:
+     # cpu: 2000m
+
+nginx:
+  enabled: false
+  #resources:
+   # requests:
+    #  cpu: 500m
+    #limits:
+     # cpu: 500m
+
+#Stack
+stack: 1-----1
+
