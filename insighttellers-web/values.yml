@@ -10,7 +10,7 @@ replicaCount: 1
 
 #Images
 image:
-  repository: ni3devops/inisghttellers
+  repository: devopsni3/inisghttellers
   tag: a-------------------------------9
   pullPolicy: Always
 
