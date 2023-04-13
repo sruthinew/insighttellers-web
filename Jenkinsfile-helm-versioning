@@ -1,0 +1,52 @@
+
+pipeline {
+    agent any
+
+    environment{
+        registry = "labs47b/finca360-frontend"
+        registryCredential = "local-docker"
+        dockerImage = ''
+        DockerfilePath = "Dockerfile"
+    }
+    stages {
+        stage('sementic-release') {
+            steps{
+                withCredentials(
+                        [   usernamePassword(credentialsId: 'local-docker', 
+                            passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME'),
+                            usernameColonPassword(credentialsId: 'github_cred', variable: 'GIT_CREDENTIALS'),
+                        ]
+                    ) {
+                       sh "sed -i -e \"s#IMAGE_NAME#${registry}#g\" .releaserc"
+                       sh "sed -i -e \"s#Dockerfile#${DockerfilePath}#g\" .releaserc"
+                    //    sh "sed -i -e \"s#BUILD_CMD# --build-arg BUILD_CMD=${BUILD_CMD} #g\" .releaserc"
+                       sh " cat .releaserc"
+                       sh "/usr/bin/semantic-release --no-ci --debug"
+                       sh "export `cat version`"
+                }
+            }
+        }
+        stage('Remove Unused Dockerimage') {
+            steps{
+                 sh 'export `cat version` && docker rmi $registry:${SEM_VERSION}'
+           }
+        }
+        stage('Secrets Copy') {
+            steps{
+                    withCredentials([file(credentialsId: 'LocalKubernetes', variable: 'LocalKubernetes')]) {
+                        sh "cp \$LocalKubernetes config"
+                }
+            }
+        }
+        stage('Kubernetes Deploy') {
+            steps{
+                sh 'export `cat version` && helm --kubeconfig=config upgrade -i insighttellers-web ./insighttellers-web -n $namespace --set image.tag=${SEM_VERSION}'
+            }
+        }
+        stage('Workspace Cleanup') {
+            steps{
+                cleanWs()
+            }
+        }
+    }
+}
