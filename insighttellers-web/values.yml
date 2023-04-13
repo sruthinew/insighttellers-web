@@ -10,7 +10,6 @@ replicaCount: 1
 #Images
 image:
         repository: ni3devops/inisghttellers
-  tag: a-------------------------------9
   pullPolicy: Always
 
 #Ingress-host
