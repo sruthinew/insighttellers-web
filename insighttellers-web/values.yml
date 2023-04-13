@@ -9,7 +9,7 @@ replicaCount: 1
 
 #Images
 image:
-        repository: ni3devops/inisghttellers:latest
+        repository: ni3devops/inisghttellers
   tag: a-------------------------------9
   pullPolicy: Always
 
