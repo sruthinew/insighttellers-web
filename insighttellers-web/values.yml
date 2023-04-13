@@ -3,7 +3,7 @@
 # Declare variables to be passed into your templates.
 
 #Name
-name: finca-frontend
+name: insighttellers-web
 
 #Replica
 replicaCount: 1
