@@ -38,6 +38,7 @@ pipeline {
         }
         stage('docker Deploy') {
             steps{
+            sh 'export `cat version` && helm --kubeconfig=config upgrade -i insighttellers-web ./insighttellers-web'
             sh 'helm --kubeconfig=config upgrade -i insighttellers-web-app ./insighttellers-web'
             }
         }
